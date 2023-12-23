@@ -29,20 +29,16 @@ public class Shape {
         double maxLengthside = 0;
         double side;
 
-        for (int i = 0; i < 9; i++) {
-            side = pointsArrayList.get(i).distanceTo(pointsArrayList.get(i + 1));
-            if (maxLengthside < side) {
-                maxLengthside = side;
+        double longestSide = 0;
+        for (int i = 0; i < pointsArrayList.size(); i++) {
+            Point currentPoint = pointsArrayList.get(i);
+            Point nextPoint = pointsArrayList.get((i + 1) % pointsArrayList.size());
+            double distance = currentPoint.distanceTo(nextPoint);
+            if (distance > longestSide) {
+                longestSide = distance;
             }
         }
-
-        // Checking the distance between the last and first points
-        side = pointsArrayList.get(0).distanceTo(pointsArrayList.get(9));
-        if (maxLengthside < side) {
-            maxLengthside = side;
-        }
-
-        return maxLengthside;
+        return longestSide;
     }
 
     // Method to calculate the average length of the sides of the shape.
@@ -52,4 +48,3 @@ public class Shape {
         return perimeter  / pointsArrayList.size();
     }
 }
-
